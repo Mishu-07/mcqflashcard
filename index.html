@@ -34,7 +34,12 @@
         <div class="flashcard-wrapper">
             <div class="flashcard" id="flashcard">
                 <div class="card-face card-front">
-                    <div class="card-tag">CONCEPT CHALLENGE</div>
+                    <div class="card-header-row">
+                        <div class="card-tag">CONCEPT CHALLENGE</div>
+                        <button class="review-flip-back-btn hidden" id="returnToExplanationBtn">
+                            View Explanation <i class="fa-solid fa-reply"></i>
+                        </button>
+                    </div>
                     <div class="question-container">
                         <h2 class="question-text" id="questionText">Loading question details...</h2>
                     </div>
@@ -46,11 +51,20 @@
                         <i class="fa-regular fa-lightbulb"></i> Need a hint?
                     </div>
                     <p class="hint-text hidden" id="hintText"></p>
+
+                    <button class="next-btn hidden" id="frontNextBtn" style="margin-top: 15px;">
+                        Next Card <i class="fa-solid fa-arrow-right"></i>
+                    </button>
                 </div>
 
                 <div class="card-face card-back">
                     <div class="feedback-icon" id="feedbackIcon"></div>
                     <h3 id="feedbackTitle">Status</h3>
+                    
+                    <div class="review-question-toggle" id="reviewToggle">
+                        <i class="fa-solid fa-rotate"></i> View Question Card
+                    </div>
+
                     <div class="explanation-box">
                         <p class="explanation-text" id="explanationText"></p>
                     </div>
@@ -76,8 +90,7 @@
                     Next <i class="fa-solid fa-chevron-right"></i>
                 </button>
             </div>
-            <div class="question-grid" id="questionGrid">
-                </div>
+            <div class="question-grid" id="questionGrid"></div>
         </div>
 
         <footer>
