@@ -90,7 +90,7 @@ header {
 .flashcard-wrapper {
     perspective: 1200px;
     width: 100%;
-    height: 480px; 
+    height: 520px; 
     margin-bottom: 20px;
     position: relative;
 }
@@ -129,6 +129,14 @@ header {
     z-index: 2;
 }
 
+.card-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
 .card-tag {
     align-self: flex-start;
     font-size: 0.65rem;
@@ -138,8 +146,24 @@ header {
     color: var(--accent-blue);
     padding: 5px 12px;
     border-radius: 30px;
-    margin-bottom: 15px;
     border: 1px solid rgba(0, 242, 254, 0.15);
+}
+
+.review-flip-back-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--accent-blue);
+    color: var(--accent-blue);
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.review-flip-back-btn:hover {
+    background: rgba(0, 242, 254, 0.1);
+    box-shadow: 0 0 8px var(--glow);
 }
 
 .question-container {
@@ -239,6 +263,23 @@ header {
 .card-back.is-correct .feedback-icon { color: var(--correct); }
 .card-back.is-incorrect .feedback-icon { color: var(--incorrect); }
 
+.review-question-toggle {
+    font-size: 0.8rem;
+    color: var(--accent-blue);
+    cursor: pointer;
+    margin-top: 5px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: rgba(0, 242, 254, 0.05);
+    border: 1px solid rgba(0, 242, 254, 0.1);
+    transition: all 0.2s ease;
+}
+
+.review-question-toggle:hover {
+    background: rgba(0, 242, 254, 0.15);
+    box-shadow: 0 0 8px var(--glow);
+}
+
 .explanation-box {
     background: rgba(0, 0, 0, 0.2);
     border-radius: 16px;
@@ -259,7 +300,6 @@ header {
     text-align: center;
 }
 
-/* 🎨 Question Navigation Bottom Block Modules */
 .navigation-panel {
     background: rgba(22, 28, 42, 0.6);
     border: 1px solid rgba(255, 255, 255, 0.04);
@@ -320,7 +360,6 @@ header {
     padding-right: 4px;
 }
 
-/* Styled Scrollbars for Grid Overflows */
 .question-grid::-webkit-scrollbar, .card-face::-webkit-scrollbar {
     width: 4px;
 }
@@ -329,7 +368,6 @@ header {
     border-radius: 10px;
 }
 
-/* 🟢🔴⚪ Question Indicator Rings and Dots Styles */
 .q-circle {
     width: 28px;
     height: 28px;
@@ -342,8 +380,6 @@ header {
     cursor: pointer;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     user-select: none;
-    
-    /* Default untouched state */
     background: #22293a;
     border: 1px solid rgba(255, 255, 255, 0.05);
     color: var(--text-muted);
@@ -445,6 +481,6 @@ footer {
     .card-face { padding: 18px; }
     .question-text { font-size: 1rem; }
     .option { padding: 10px 12px; font-size: 0.85rem; }
-    .flashcard-wrapper { height: 430px; }
+    .flashcard-wrapper { height: 460px; }
     .q-circle { width: 25px; height: 25px; font-size: 0.7rem; }
 }
