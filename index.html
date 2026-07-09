@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urban Pulse // MCQ Flashcards</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="logo">URBAN<span>PULSE</span></div>
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="stats">
+                <span id="cardIndex">Loading Card...</span>
+                <span id="scoreTracker">Score: 0</span>
+            </div>
+        </header>
+
+        <div class="flashcard-wrapper">
+            <div class="flashcard" id="flashcard">
+                <div class="card-face card-front">
+                    <div class="card-tag">CONCEPT CHALLENGE</div>
+                    <div class="question-container">
+                        <h2 class="question-text" id="questionText">Loading question details...</h2>
+                    </div>
+                    
+                    <div class="options-container" id="optionsContainer">
+                        </div>
+                    
+                    <div class="hint-action" id="hintAction">
+                        <i class="fa-regular fa-lightbulb"></i> Need a hint?
+                    </div>
+                    <p class="hint-text hidden" id="hintText"></p>
+                </div>
+
+                <div class="card-face card-back">
+                    <div class="feedback-icon" id="feedbackIcon"></div>
+                    <h3 id="feedbackTitle">Status</h3>
+                    <div class="explanation-box">
+                        <p class="explanation-text" id="explanationText"></p>
+                    </div>
+                    <button class="next-btn" id="nextBtn">Next Card <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="results-screen hidden" id="resultsScreen">
+            <i class="fa-solid fa-trophy trophy-icon"></i>
+            <h2>Session Complete</h2>
+            <p id="finalScoreText"></p>
+            <button class="reset-btn" id="resetBtn">Restart Deck</button>
+        </div>
+
+        <div class="navigation-panel" id="navigationPanel">
+            <div class="nav-controls">
+                <button class="nav-arrow-btn" id="prevBtn" title="Previous Question">
+                    <i class="fa-solid fa-chevron-left"></i> Prev
+                </button>
+                <div class="nav-label">Deck Navigation</div>
+                <button class="nav-arrow-btn" id="navNextBtn" title="Next Question">
+                    Next <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="question-grid" id="questionGrid">
+                </div>
+        </div>
+
+        <footer>
+            Designed by Mishu with <i class="fa-solid fa-heart heart-icon"></i>
+        </footer>
+    </div>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>
