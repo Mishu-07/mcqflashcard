@@ -1,5 +1,5 @@
 // ==========================================
-// 📝 DATA STOREBANK: EDIT AND ADD MCQs HERE
+// 📝 DATA STOREBANK: ALL 50 QUESTIONS
 // ==========================================
 const quizDataRaw = [
     {
@@ -31,39 +31,39 @@ const quizDataRaw = [
         explanation: "The block size is 8 bytes. Since $2^3 = 8$, $\\log_2(8)$ gives 3 offset bits."
     },
     {
-        question: "A direct mapped cache contains 256 cache lines. The number of index bits equals:",
+        question: "A direct mapped cache contains 256 cache entries. The number of index bits equals:",
         options: ["6", "7", "8", "9"],
         correctIndex: 2,
-        hint: "Index bits equal $\\log_2$ of the total number of cache lines.",
-        explanation: "With 256 unique lines available, $\\log_2(256)$ yields 8 index bits to adequately address each line."
+        hint: "Index bits equal $\\log_2$ of the total number of cache entries.",
+        explanation: "With 256 unique entries available, $\\log_2(256)$ yields 8 index bits to adequately address each entry location."
     },
     {
         question: "Which cache organization produces the largest number of conflict misses?",
         options: ["Fully Associative", "Set Associative", "Direct Mapped", "Victim Cache"],
         correctIndex: 2,
-        hint: "Consider the most restrictive placement policy layout where memory maps to exactly one line.",
-        explanation: "Direct Mapped caches have strict one-to-one line mapping constraints, resulting in high line-thrashing frequencies and severe conflict miss profiles."
+        hint: "Consider the most restrictive placement policy layout where memory maps to exactly one entry.",
+        explanation: "Direct Mapped caches have strict one-to-one entry mapping constraints, resulting in high entry-thrashing frequencies and severe conflict miss profiles."
     },
     {
-        question: "A memory address is 32 bits. Cache has 1024 lines and block size is 16 bytes. Number of tag bits is:",
+        question: "A memory address is 32 bits. Cache has 1024 entries and block size is 16 bytes. Number of tag bits is:",
         options: ["16", "18", "20", "22"],
         correctIndex: 1,
         hint: "$\\text{Tag Bits} = \\text{Total Address Bits} - \\text{Index Bits} - \\text{Offset Bits}$.",
         explanation: "$$\\text{Offset} = \\log_2(16) = 4\\text{ bits}$$ $$\\text{Index} = \\log_2(1024) = 10\\text{ bits}$$ $$\\text{Tag} = 32 - 10 - 4 = 18\\text{ bits}$$"
     },
     {
-        question: "A cache has 128 lines and a block size of 32 bytes. The total cache capacity is:",
+        question: "A cache has 128 entries and a block size of 32 bytes. The total cache capacity is:",
         options: ["2 KB", "4 KB", "8 KB", "16 KB"],
         correctIndex: 1,
-        hint: "Multiply the total number of lines directly by the size of each block.",
-        explanation: "$\\text{Capacity} = 128\\text{ lines} \\times 32\\text{ bytes} = 4096\\text{ bytes}$. Since $\\frac{4096}{1024} = 4\\text{ KB}$."
+        hint: "Multiply the total number of entries directly by the size of each block.",
+        explanation: "$\\text{Capacity} = 128\\text{ entries} \\times 32\\text{ bytes} = 4096\\text{ bytes}$. Since $\\frac{4096}{1024} = 4\\text{ KB}$."
     },
     {
         question: "The smallest unit transferred between cache and main memory is called a:",
         options: ["Word", "Byte", "Block", "Register"],
         correctIndex: 2,
-        hint: "This multi-byte chunk travels as an aggregate line data block layout.",
-        explanation: "A block (also known as a cache line) represents the atomic chunk grouping brought into cache hierarchies during a miss lifecycle sequence."
+        hint: "This multi-byte chunk travels as an aggregate data block layout.",
+        explanation: "A block represents the atomic chunk grouping brought into cache hierarchies during a miss lifecycle sequence."
     },
     {
         question: "If block size = 64 bytes, how many offset bits are required?",
@@ -115,18 +115,18 @@ const quizDataRaw = [
         explanation: "128 KB = $128 \\times 1024\\text{ bytes} = 131,072\\text{ bytes}$. Since $2^{17} = 131,072$, it requires 17 bit channels."
     },
     {
-        question: "A direct mapped cache has 64 lines. If memory block number = 145, the cache index equals:",
+        question: "A direct mapped cache has 64 entries. If memory block number = 145, the cache index equals:",
         options: ["15", "17", "19", "21"],
         correctIndex: 1,
-        hint: "Apply the modulo mapping operator rule: $(\\text{Block Number} \\pmod{\\text{Total Cache Lines}})$.",
-        explanation: "$145 \\pmod{64}$ results in a remaining value of $17$. Thus, it maps cleanly to index line 17."
+        hint: "Apply the modulo mapping operator rule: $(\\text{Block Number} \\pmod{\\text{Total Cache Entries}})$.",
+        explanation: "$145 \\pmod{64}$ results in a remaining value of $17$. Thus, it maps cleanly to entry index 17."
     },
     {
-        question: "Block number = 350. Cache lines = 32. Which cache line stores this block?",
+        question: "Block number = 350. Cache entries = 32. Which cache entry stores this block?",
         options: ["28", "29", "30", "31"],
         correctIndex: 2,
         hint: "Use remainder calculation logic via the modulo strategy: $350 \\pmod{32}$.",
-        explanation: "350 divided by 32 equals 10 with a remainder of 30. ($350 \\pmod{32} = 30$)."
+        explanation: "350 divided by 32 equals 10 with a remainder of 30. ($350 \\pmod{32} = 30$). The target block maps into entry slot 30."
     },
     {
         question: "An instruction cache miss causes a stall in which pipeline execution stage?",
@@ -157,25 +157,25 @@ const quizDataRaw = [
         explanation: "A write stall represents execution bubbles introduced when processing threads wait for storage components to complete down-stream memory updates."
     },
     {
-        question: "Cache size = 8 KB. Block size = 32 bytes. The number of cache lines equals:",
+        question: "Cache size = 8 KB. Block size = 32 bytes. The number of cache entries equals:",
         options: ["128", "256", "512", "1024"],
         correctIndex: 1,
         hint: "Convert 8 KB to bytes and divide by the 32-byte block metric.",
-        explanation: "$8\\text{ KB} = 8 \\times 1024 = 8192\\text{ bytes}$. $\\frac{8192}{32} = 256\\text{ lines}$."
+        explanation: "$8\\text{ KB} = 8 \\times 1024 = 8192\\text{ bytes}$. $\\frac{8192}{32} = 256\\text{ entries}$."
     },
     {
-        question: "A cache has 512 lines, Block size = 64 bytes, and Address size = 32 bits. Number of tag bits equals:",
+        question: "A cache has 512 entries, Block size = 64 bytes, and Address size = 32 bits. Number of tag bits equals:",
         options: ["17", "18", "19", "20"],
         correctIndex: 0,
         hint: "$\\text{Tag Bits} = 32 - \\log_2(512) - \\log_2(64)$.",
         explanation: "$$\\text{Offset} = \\log_2(64) = 6\\text{ bits}$$ $$\\text{Index} = \\log_2(512) = 9\\text{ bits}$$ $$\\text{Tag bits} = 32 - 9 - 6 = 17\\text{ bits}$$"
     },
     {
-        question: "A direct mapped cache has 4 cache lines. Memory blocks accessed are: 0, 4, 8, 0, 4, 8. How many cache hits occur?",
+        question: "A direct mapped cache has 4 cache entries. Memory blocks accessed are: 0, 4, 8, 0, 4, 8. How many cache hits occur?",
         options: ["0", "1", "2", "3"],
         correctIndex: 0,
         hint: "Determine block allocation using modulo 4. Do they replace each other?",
-        explanation: "Blocks 0, 4, and 8 all evaluate to index position 0 ($0 \\pmod{4}=0$, $4 \\pmod{4}=0$, $8 \\pmod{4}=0$). They continually evict each other, causing zero hits."
+        explanation: "Blocks 0, 4, and 8 all evaluate to index position 0 ($0 \\pmod{4}=0$, $4 \\pmod{4}=0$, $8 \\pmod{4}=0$). They continually evict each other inside entry 0, causing zero hits."
     },
     {
         question: "Block size = 8 bytes. Which bits of the address represent the block offset?",
@@ -192,39 +192,39 @@ const quizDataRaw = [
         explanation: "$$\\text{Blocks} = \\frac{64 \\times 1024\\text{ bytes}}{32\\text{ bytes}} = 2048\\text{ blocks}$$"
     },
     {
-        question: "Which cache organization allows a memory block to be placed in any cache line?",
+        question: "Which cache organization allows a memory block to be placed in any cache entry?",
         options: ["Direct Mapped", "Fully Associative", "Set Associative", "Victim Cache"],
         correctIndex: 1,
         hint: "Think about the layout rule structure that imposes absolute layout positioning freedom anywhere.",
-        explanation: "Fully Associative designs bypass set routing indices completely, allowing a storage line block to exist anywhere inside the cache tracking pool layout."
+        explanation: "Fully Associative designs bypass set routing indices completely, allowing a storage block to exist anywhere inside the cache tracking entry pool."
     },
     {
-        question: "Address size = 20 bits, block size = 8 bytes, direct mapped cache with 16 lines. Tag bits =",
+        question: "Address size = 20 bits, block size = 8 bytes, direct mapped cache with 16 entries. Tag bits =",
         options: ["13", "14", "15", "16"],
         correctIndex: 0,
-        hint: "Formula: $\\text{Tag} = \\text{Address Size} - \\log_2(\\text{Block Size}) - \\log_2(\\text{Lines})$",
+        hint: "Formula: $\\text{Tag} = \\text{Address Size} - \\log_2(\\text{Block Size}) - \\log_2(\\text{Entries})$",
         explanation: "$$\\text{Offset} = \\log_2(8) = 3\\text{ bits}$$ $$\\text{Index} = \\log_2(16) = 4\\text{ bits}$$ $$\\text{Tag} = 20 - 3 - 4 = 13\\text{ bits}$$"
     },
     {
-        question: "A cache has 16 lines and block size 8 bytes. Total cache capacity =",
+        question: "A cache has 16 entries and block size 8 bytes. Total cache capacity =",
         options: ["32 bytes", "64 bytes", "128 bytes", "256 bytes"],
         correctIndex: 2,
-        hint: "Multiply total index structural lines directly against block byte sizes.",
-        explanation: "$\\text{Capacity} = 16\\text{ lines} \\times 8\\text{ bytes} = 128\\text{ bytes}$."
+        hint: "Multiply total index structural entries directly against block byte sizes.",
+        explanation: "$\\text{Capacity} = 16\\text{ entries} \\times 8\\text{ bytes} = 128\\text{ bytes}$."
     },
     {
         question: "What is the main cause of the 0% hit rate in the direct mapped example on page 92?",
         options: ["Conflict misses", "Capacity misses", "Compulsory misses", "Write misses"],
         correctIndex: 0,
         hint: "Think about competitive cache access overrides involving matching mapping indexes.",
-        explanation: "Conflict misses happen when multiple addresses battle for identical index fields, creating constant evictions even if available line slots go unused."
+        explanation: "Conflict misses happen when multiple addresses battle for identical entry fields, creating constant evictions even if available slots go unused."
     },
     {
-        question: "Block number = 1036 in a direct mapped cache with 4 lines. Cache index =",
+        question: "Block number = 1036 in a direct mapped cache with 4 entries. Cache index =",
         options: ["0", "1", "2", "3"],
         correctIndex: 0,
-        hint: "Apply mod logic: $\\text{Block Number} \\pmod{\\text{Cache Lines}}$.",
-        explanation: "$1036 \\pmod{4} = 0$, meaning the execution path assigns this block to line index 0."
+        hint: "Apply mod logic: $\\text{Block Number} \\pmod{\\text{Cache Entries}}$.",
+        explanation: "$1036 \\pmod{4} = 0$, meaning the execution path assigns this block to entry index 0."
     },
     {
         question: "Hit rate = 97%, miss penalty = 50 cycles, hit time = 1 cycle. AMAT =",
@@ -307,14 +307,14 @@ const quizDataRaw = [
         question: "What does the valid bit indicate?",
         options: ["Cache index", "Block offset", "Whether the cache block contains valid data", "The replacement policy"],
         correctIndex: 2,
-        hint: "Think about checking if a line's cached block data is authentic and initialized.",
+        hint: "Think about checking if a slot's cached block data is authentic and initialized.",
         explanation: "The valid bit works as a binary status flag tracking whether a slot stores contextually active target memory or uninitialized junk data."
     },
     {
         question: "A direct mapped cache has 32 cache entries. A memory block number is 95. The memory block will be placed in cache entry:",
         options: ["29", "30", "28", "31"],
         correctIndex: 3,
-        hint: "Evaluate standard modulo logic coordinates: $\\text{Block Number} \\pmod{\\text{Cache Entries}}$.",
+        hint: "Evaluate standard modulo coordinates: $\\text{Block Number} \\pmod{\\text{Cache Entries}}$.",
         explanation: "$\\text{Cache Entry} = 95 \\pmod{32} = 31$."
     },
     {
@@ -332,11 +332,11 @@ const quizDataRaw = [
         explanation: "Decimal address $14871$ divided by $8$ equals $1858.875$. Dropping the fraction yields block number $1858$."
     },
     {
-        question: "Which field of a direct mapped address selects the cache line?",
+        question: "Which field of a direct mapped address selects the cache entry?",
         options: ["Tag", "Offset", "Valid", "Index"],
         correctIndex: 3,
-        hint: "Identify the unique bits that specify row line arrays.",
-        explanation: "The address index segment targets explicit line rows mapped inside structured direct cache lookup systems."
+        hint: "Identify the unique bits that specify entry index fields.",
+        explanation: "The address index segment targets explicit row entry index fields mapped inside structured direct cache lookup systems."
     },
     {
         question: "For a fully associative cache: Address size = 20 bits, Block size = 8 bytes. Tag bits =",
