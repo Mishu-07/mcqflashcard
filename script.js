@@ -3,13 +3,10 @@ import quizDataRaw from './questions.js';
 let quizData = [];
 let currentIndex = 0;
 let score = 0;
-
-// Tracks individual question outcomes: 'untouched', 'correct', or 'incorrect'
 let userProgressState = []; 
-// Caches historical answer configurations chosen per question to recall them when jumping back
 let userSelectedAnswers = []; 
 
-// DOM Linkage Map
+// DOM Elements Link Map
 const flashcard = document.getElementById('flashcard');
 const questionText = document.getElementById('questionText');
 const optionsContainer = document.getElementById('optionsContainer');
@@ -30,6 +27,9 @@ const resultsScreen = document.getElementById('resultsScreen');
 const finalScoreText = document.getElementById('finalScoreText');
 const questionGrid = document.getElementById('questionGrid');
 const navigationPanel = document.getElementById('navigationPanel');
+const reviewToggle = document.getElementById('reviewToggle');
+const returnToExplanationBtn = document.getElementById('returnToExplanationBtn');
+const frontNextBtn = document.getElementById('frontNextBtn');
 
 function shuffleQuestions() {
     quizData = [...quizDataRaw];
@@ -37,7 +37,6 @@ function shuffleQuestions() {
         const j = Math.floor(Math.random() * (i + 1));
         [quizData[i], quizData[j]] = [quizData[j], quizData[i]];
     }
-    // Set baseline arrays matching tracking boundaries
     userProgressState = new Array(quizData.length).fill('untouched');
     userSelectedAnswers = new Array(quizData.length).fill(null);
 }
@@ -66,13 +65,13 @@ function typesetMath() {
 
 function initCard() {
     hintText.classList.add('hidden');
+    returnToExplanationBtn.classList.add('hidden');
+    frontNextBtn.classList.add('hidden'); // Initially keep hidden on fresh cards
     flashcard.classList.remove('flipped');
     
-    // Manage dynamic arrow visibility parameters
     prevBtn.disabled = currentIndex === 0;
     navNextBtn.disabled = currentIndex === quizData.length - 1;
 
-    // Check complete deck metrics conditions
     const allAnswered = userProgressState.every(state => state !== 'untouched');
     if (allAnswered && currentIndex >= quizData.length) {
         showResults();
@@ -83,7 +82,6 @@ function initCard() {
     
     cardIndexEl.textContent = `Card ${currentIndex + 1} of ${quizData.length}`;
     
-    // Calculate progress bar relative to total answers given
     const totalAnsweredCount = userProgressState.filter(s => s !== 'untouched').length;
     progressBar.style.width = `${(totalAnsweredCount / quizData.length) * 100}%`;
     
@@ -97,7 +95,6 @@ function initCard() {
         button.className = 'option';
         button.innerHTML = `<span> ${option} </span><i class="fa-regular fa-circle"></i>`;
         
-        // Handle render states based on whether this card has historical records
         if (userProgressState[currentIndex] !== 'untouched') {
             const savedChoice = userSelectedAnswers[currentIndex];
             if (idx === currentCard.correctIndex) {
@@ -108,22 +105,21 @@ function initCard() {
                 button.querySelector('i').className = 'fa-solid fa-circle-xmark';
             }
             button.style.cursor = 'default';
+            frontNextBtn.classList.remove('hidden'); // Expose next page control if history log paths match
         } else {
             button.onclick = () => selectOption(idx, button);
         }
         optionsContainer.appendChild(button);
     });
 
-    // Restore back-face data states cleanly if already flipped/processed historical cards
     if (userProgressState[currentIndex] !== 'untouched') {
         const isCorrect = userProgressState[currentIndex] === 'correct';
         setupFeedbackCard(isCorrect);
-        // Flip instantly without delay intervals
         flashcard.classList.add('flipped');
     }
 
     buildNavigationGrid();
-    typesetMath();
+    setTimeout(typesetMath, 50);
 }
 
 function selectOption(selectedIndex, element) {
@@ -150,16 +146,12 @@ function selectOption(selectedIndex, element) {
         setupFeedbackCard(false);
     }
 
-    // Freeze choice updates once selected
     options.forEach(btn => btn.style.cursor = 'default');
+    frontNextBtn.classList.remove('hidden'); // Reveal next control node right after option selection
 
-    typesetMath();
     buildNavigationGrid();
-    
-    // Auto-reveal slide action
-    setTimeout(() => {
-        flashcard.classList.add('flipped');
-    }, 150);
+    flashcard.classList.add('flipped');
+    setTimeout(typesetMath, 100);
 }
 
 function setupFeedbackCard(isCorrect) {
@@ -187,11 +179,32 @@ function resetQuiz() {
     initCard();
 }
 
-// Action Event Setup Blocks
+// Action Event Configurations
 hintAction.onclick = (e) => {
     e.stopPropagation();
     hintText.classList.toggle('hidden');
     typesetMath();
+};
+
+reviewToggle.onclick = (e) => {
+    e.stopPropagation();
+    flashcard.classList.remove('flipped'); 
+    returnToExplanationBtn.classList.remove('hidden'); 
+};
+
+returnToExplanationBtn.onclick = (e) => {
+    e.stopPropagation();
+    flashcard.classList.add('flipped'); 
+    returnToExplanationBtn.classList.add('hidden');
+};
+
+frontNextBtn.onclick = () => {
+    if (currentIndex < quizData.length - 1) {
+        currentIndex++;
+        initCard();
+    } else {
+        showResults();
+    }
 };
 
 nextBtn.onclick = () => {
@@ -221,6 +234,5 @@ resetBtn.onclick = () => {
     resetQuiz();
 };
 
-// Initial Core Launch Routine
 shuffleQuestions();
 initCard();
